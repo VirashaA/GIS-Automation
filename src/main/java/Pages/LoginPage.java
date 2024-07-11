@@ -19,7 +19,7 @@ public class LoginPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Wait for up to 10 seconds
     }
 
-    // Locators for email, password, and login button
+    // Locators
     By emailField = By.name("email");
     By passwordField = By.name("password");
     By loginButton = By.xpath("//button[@type='submit']");
@@ -28,6 +28,7 @@ public class LoginPage {
     By errorMessageInvalidEmail = By.xpath("//*[@id=\"headlessui-tabs-panel-:r2:\"]/div/form/div/span");
     By rememberMeField = By.xpath("//input[@type='checkbox']");
     By forgotPasswordLink = By.xpath("//a[@class='text-sm underline font-medium']");
+    By registerTab = By.xpath("//button[contains(text(), 'Register')]");
 
     // Method to enter email
     public void enterEmail(String email) {
@@ -94,6 +95,11 @@ public class LoginPage {
     // Method to click on the "Forgot Password" link
     public void clickForgotPasswordLink() {
         driver.findElement(forgotPasswordLink).click();
+    }
+
+    // Method to click on the "Register" tab"
+    public void clickRegisterTab() {
+        driver.findElement(registerTab).click();
     }
 
 }

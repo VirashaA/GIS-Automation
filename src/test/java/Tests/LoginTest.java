@@ -248,6 +248,20 @@ public class LoginTest {
         System.out.println("Test case Pass: Navigated to the Forgot Password page.");
     }
 
+    @Test
+    public void testRegisterTab() {
+        LoginPage loginPage = new LoginPage(driver);
+
+        // Click on the "Register" tab
+        loginPage.clickRegisterTab();
+
+        // Verify that the URL is correct
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://natpower-gis-dev-application.azurewebsites.net/auth", "Test case failed: Did not navigate to the Register page.");
+
+        System.out.println("Test case Pass: Navigated to the Register page.");
+    }
+
     @AfterMethod
     public void tearDown() {
         driver.quit();
