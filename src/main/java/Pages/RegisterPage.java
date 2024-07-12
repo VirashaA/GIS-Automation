@@ -3,6 +3,7 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -26,6 +27,9 @@ public class RegisterPage {
     By passwordField = By.name("password");
     By confirmPasswordField = By.name("confirm_password");
     By registerButton = By.xpath("//button[@type='submit']");
+    By errorMessageInvalidEmail = By.xpath("//*[@id=\"headlessui-tabs-panel-:r3:\"]/div/form/div/span");
+    By errorMessageDuplicateEmail = By.xpath("//*[@id=\"headlessui-tabs-panel-:r3:\"]/div/form/div/div[5]/div");
+    By errorMessageDifferentPassword = By.xpath("//*[@id=\"headlessui-tabs-panel-:r3:\"]/div/form/div/span");
 
     // Method to click on the "Register" tab"
     public void clickRegisterTab() {
@@ -66,5 +70,23 @@ public class RegisterPage {
     public boolean isRegisterButtonEnabled() {
         WebElement registerBtn = driver.findElement(registerButton);
         return registerBtn.isEnabled();
+    }
+
+    // Method to get error message text for invalid format email
+    public String geterrorMessageInvalidEmail() {
+        WebElement errorElement1 = wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessageInvalidEmail));
+        return errorElement1.getText();
+    }
+
+    // Method to get error message text for duplicated emails
+    public String geterrorMessageDuplicateEmail() {
+        WebElement errorElement1 = wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessageDuplicateEmail));
+        return errorElement1.getText();
+    }
+
+    // Method to get error message text for different passwords
+    public String geterrorMessageDifferentPasswords() {
+        WebElement errorElement1 = wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessageDifferentPassword));
+        return errorElement1.getText();
     }
 }
