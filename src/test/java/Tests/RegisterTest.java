@@ -2,23 +2,15 @@ package Tests;
 
 import Pages.LoginPage;
 import Pages.RegisterPage;
-import org.openqa.selenium.WebDriver;
+import base.BaseTest;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import utils.WebDriverManager;
 
-public class RegisterTest {
-    WebDriver driver;
+public class RegisterTest extends BaseTest {
 
     @BeforeMethod
-    public void setUp() {
-        driver = WebDriverManager.getDriver();
-        driver.manage().window().maximize();
-        driver.get("https://natpower-gis-dev-application.azurewebsites.net/auth");
-
-        // Navigate to the Register page by clicking the Register tab
+    public void navigateToRegisterPage() {
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.clickRegisterTab();
     }
@@ -110,7 +102,7 @@ public class RegisterTest {
     public void testRegisterButtonDisabledForLastNameEmpty() throws InterruptedException {
         RegisterPage registerPage = new RegisterPage(driver);
 
-        // Provide Last Name
+        // Provide First Name
         Thread.sleep(1000);
         registerPage.enterFirstName("John");
 
@@ -130,14 +122,14 @@ public class RegisterTest {
         boolean isRegisterButtonEnabled = registerPage.isRegisterButtonEnabled();
         Assert.assertFalse(isRegisterButtonEnabled, "Test case failed: Register button should be disabled when Last Name is empty!");
 
-        System.out.println("Test case Pass: Register button is disabled when First Last field is empty.");
+        System.out.println("Test case Pass: Register button is disabled when Last Name field is empty.");
     }
 
     @Test
     public void testRegisterButtonDisabledForEmailEmpty() throws InterruptedException {
         RegisterPage registerPage = new RegisterPage(driver);
 
-        // Provide Last Name
+        // Provide First Name
         Thread.sleep(1000);
         registerPage.enterFirstName("John");
 
@@ -203,7 +195,7 @@ public class RegisterTest {
         Thread.sleep(1000);
         registerPage.enterEmail("j.smith@natpower.com");
 
-        // Provide  Password
+        // Provide Password
         Thread.sleep(1000);
         registerPage.enterPassword("1234");
 
@@ -221,7 +213,6 @@ public class RegisterTest {
         // Enter a value into the email field
         registerPage.enterEmail("tem");
         Thread.sleep(1000);
-
 
         // Verify error message
         String errorMessage = registerPage.geterrorMessageInvalidEmail();
@@ -283,11 +274,11 @@ public class RegisterTest {
         Thread.sleep(1000);
         registerPage.enterEmail("j.smith@natpower.com");
 
-        // Provide  Password
+        // Provide Password
         Thread.sleep(1000);
         registerPage.enterPassword("1234");
 
-        // Provide  Confirm Password
+        // Provide Confirm Password
         Thread.sleep(1000);
         registerPage.enterConfirmPassword("12345");
 
@@ -298,8 +289,17 @@ public class RegisterTest {
         System.out.println("Test case Pass: Correct error message is displayed.");
     }
 
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
+    @Test
+    public void testLoginTab() {
+        RegisterPage registerPage = new RegisterPage(driver);
+
+        // Click on the "Login" tab
+        registerPage.clickLoginTab();
+
+        // Verify that the URL is correct
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://natpower-gis-dev-application.azurewebsites.net/auth", "Test case failed: Did not navigate to the Login page.");
+
+        System.out.println("Test case Pass: Navigated to the Login page.");
     }
 }

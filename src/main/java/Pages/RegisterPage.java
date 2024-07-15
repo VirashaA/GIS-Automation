@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class RegisterPage {
@@ -30,6 +29,7 @@ public class RegisterPage {
     By errorMessageInvalidEmail = By.xpath("//*[@id=\"headlessui-tabs-panel-:r3:\"]/div/form/div/span");
     By errorMessageDuplicateEmail = By.xpath("//*[@id=\"headlessui-tabs-panel-:r3:\"]/div/form/div/div[5]/div");
     By errorMessageDifferentPassword = By.xpath("//*[@id=\"headlessui-tabs-panel-:r3:\"]/div/form/div/span");
+    By loginTab = By.xpath("//*[@id=\"headlessui-tabs-tab-:r0:\"]");
 
     // Method to click on the "Register" tab"
     public void clickRegisterTab() {
@@ -88,5 +88,10 @@ public class RegisterPage {
     public String geterrorMessageDifferentPasswords() {
         WebElement errorElement1 = wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessageDifferentPassword));
         return errorElement1.getText();
+    }
+
+    // Method to click on the "Login" tab"
+    public void clickLoginTab() {
+        driver.findElement(loginTab).click();
     }
 }

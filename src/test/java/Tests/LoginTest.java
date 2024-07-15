@@ -1,6 +1,7 @@
 package Tests;
 
 import Pages.LoginPage;
+import base.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -8,15 +9,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.WebDriverManager;
 
-public class LoginTest {
-    WebDriver driver;
+public class LoginTest extends BaseTest {
 
-    @BeforeMethod
-    public void setUp() {
-        driver = WebDriverManager.getDriver();
-        driver.manage().window().maximize();
-        driver.get("https://natpower-gis-dev-application.azurewebsites.net/auth");
-    }
 
     @Test
     public void testLogin() throws InterruptedException {
@@ -260,10 +254,5 @@ public class LoginTest {
         Assert.assertEquals(currentUrl, "https://natpower-gis-dev-application.azurewebsites.net/auth", "Test case failed: Did not navigate to the Register page.");
 
         System.out.println("Test case Pass: Navigated to the Register page.");
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
     }
 }
